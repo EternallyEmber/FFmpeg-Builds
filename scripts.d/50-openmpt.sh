@@ -3,6 +3,13 @@
 SCRIPT_REPO="https://github.com/OpenMPT/openmpt"
 SCRIPT_COMMIT="ec2e90539989fd1deced07723165a2358a67f3eb"
 
+ffbuild_depends() {
+    echo base
+    echo zlib
+    echo libogg
+    echo libvorbis
+}
+
 ffbuild_enabled() {
     [[ $TARGET == winarm64 ]] && return -1
     return 0
