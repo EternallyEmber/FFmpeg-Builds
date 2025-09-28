@@ -7,11 +7,63 @@ The minimum supported version is Windows 10 22H2, no guarantees on anything olde
 
 Linux builds are targetting RHEL/CentOS 8 (glibc-2.28 + linux-4.18) and anything more recent.
 
+Sometimes rarely I had to manually fix older compatibility issues like Windows from coming external features.
+
+## Features of Martin Eesmaa's custom FFmpeg automated builds
+
+- External support to SVT encoders of HEVC and VP9
+- Includes nonfree binaries with fdkaac (Fraunhofer AAC library)
+- Dolby AC4 native experimental decoding support
+- Apple AAC AudioToolbox encoder support (Windows only, requires iTunes or 8 dll files*)
+- Additional automated Windows builds of x86 and ARM64.
+- Additional external features follows libbsb2, CD reading, ModPlug, QR encoding/decoding.
+- External features of video by AVS3, Fraunhofer HHI VVDEC, AVS, MPEG-5 EVC, MPEG-5 LCEVC decoder.
+- External features of audio by ILBC, Google LC3, Microsoft GSM, MP3 Shine, Speex, AMR-WB and MPEG-H 3D Audio encoder from Ittiam.
+
+Implement missing features in future:
+
+```
+ladspa lcms2 libcodec2 libdc1394 libflite
+libglslang libiec61883 libklvanc liblensfun
+libopencv libopenvino librsvg libtensorflow 
+libtesseract libtorch opengl librabbitmq 
+```
+
+Old features or some errors due to compilation or/and limited which didn't fit:
+
+* `libcelt` - Only Linux builds works, but Windows of automake configuration syntax error.
+* `libcaca` - Only Linux builds works, but Windows compilation error.
+* `libsvtjpgxs` - Segmentation error after test of encode and also decoding shows weird corrupted image result of code on FFplay.
+* `libdatachannel` - Compilation error for reason undefined reference.
+* `librtmp` - No need to enable external RTMP feature, FFmpeg has already have native RTMP feature implemented.
+* `libklvanc` - Windows build failed to compile, but Linux works and it is not yet enabled until DeckLick Linux feature is available.
+* `libsmbclient` - Too complicated for to install little bit, later...
+
+For AudioToolbox encoder, it is only Windows support.
+
+Two choices for to install [iTunes](https://www.apple.com/itunes/) or use portable DLL files from iTunes without installed which is called [QTFiles](https://github.com/AnimMouse/QTFiles).
+
+Note: Install iTunes using Windows version, but Microsoft Store version may be not kinda sure.
+
+Or another method is to install [QTFiles](https://github.com/AnimMouse/QTFiles) for iTunes DLL portables for use QAAC and FFmpeg, see the instructions by link.
+
+The third option is you can manually copy DLL files from iTunes:
+
+DLL files without iTunes installed needs require 8 DLL files to order encoder `aac_at`:
+
+It can be found on: `C:\Program Files\iTunes\`:
+
+```
+CoreAudioToolbox.dll libdispatch.dll CoreFoundation.dll objc.dll libicuin.dll ASL.dll libicuuc.dll icudt62.dll
+```
+
+**Hint:** You can copy these DLL files from iTunes right next to qaac.exe or/and ffmpeg.exe.
+
 ## Auto-Builds
 
 Builds run daily at 12:00 UTC (or GitHubs idea of that time) and are automatically released on success.
 
-**Auto-Builds run ONLY for win64 and linux(arm)64. There are no win32/x86 auto-builds, though you can produce win32 builds yourself following the instructions below.**
+**Auto-Builds run ONLY for win32, win64 and linux(arm)64. There is no linux 32-bit auto-builds, I will try to add support linux 32-bit support**
 
 ### Release Retention Policy
 

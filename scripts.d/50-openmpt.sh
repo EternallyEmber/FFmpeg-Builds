@@ -1,18 +1,15 @@
 #!/bin/bash
 
-SCRIPT_REPO="https://source.openmpt.org/svn/openmpt/trunk/OpenMPT"
-SCRIPT_REV="23987"
+SCRIPT_REPO="https://github.com/OpenMPT/openmpt"
+SCRIPT_COMMIT="ec2e90539989fd1deced07723165a2358a67f3eb"
 
 ffbuild_enabled() {
     [[ $TARGET == winarm64 ]] && return -1
     return 0
 }
 
-ffbuild_dockerdl() {
-    echo "retry-tool sh -c \"rm -rf openmpt && svn checkout '${SCRIPT_REPO}@${SCRIPT_REV}' openmpt\" && cd openmpt"
-}
-
 ffbuild_dockerbuild() {
+
     local myconf=(
         PREFIX="$FFBUILD_PREFIX"
         CXXSTDLIB_PCLIBSPRIVATE="-lstdc++"
