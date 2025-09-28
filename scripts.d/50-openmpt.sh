@@ -1,7 +1,7 @@
 #!/bin/bash
 
-SCRIPT_REPO="https://github.com/OpenMPT/openmpt"
-SCRIPT_COMMIT="ec2e90539989fd1deced07723165a2358a67f3eb"
+SCRIPT_REPO="https://source.openmpt.org/svn/openmpt/trunk/OpenMPT"
+SCRIPT_REV="24178"
 
 ffbuild_depends() {
     echo base
